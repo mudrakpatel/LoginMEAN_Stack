@@ -9,7 +9,14 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+var cors = require("cors");
 var app = express();
+
+app.use(cors({
+  origin: ["http://localhost:4200",
+            "http://127.0.0.1:4200"],
+  credentials: true
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
