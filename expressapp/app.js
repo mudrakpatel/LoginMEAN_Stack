@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require("mongoose");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -17,6 +18,8 @@ app.use(cors({
             "http://127.0.0.1:4200"],
   credentials: true
 }));
+
+mongoose.connect("mongodb://hubaDupa:Mudrak@123@ds046549.mlab.com:46549/mean_stack_app");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
