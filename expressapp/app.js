@@ -19,7 +19,10 @@ app.use(cors({
   credentials: true
 }));
 
-mongoose.connect("mongodb://hubaDupa:Mudrak@123@ds046549.mlab.com:46549/mean_stack_app");
+mongoose.connect("mongodb://ds046549.mlab.com:46549/mean_stack_app",
+                  {user: "hubaDupa",
+                   pass: "Mudrak@123"},
+                  { useNewUrlParser: true }, function(error){});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
