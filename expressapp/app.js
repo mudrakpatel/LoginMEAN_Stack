@@ -24,6 +24,24 @@ mongoose.connect("mongodb://ds046549.mlab.com:46549/mean_stack_app",
                    pass: "Mudrak@123"},
                   { useNewUrlParser: true }, function(error){});
 
+var passport = require("passport");
+var session = require("express-session");
+
+app.use(session({
+  name: "myName.sessionID",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 36000000,
+    httpOnly: false,
+    secure: false
+  }
+}));
+require("./passport-config");
+app.use(passport.session());
+app.use(passport.initialize());
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
