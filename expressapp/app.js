@@ -21,16 +21,23 @@ app.use(cors({
 
 mongoose.connect("mongodb://ds046549.mlab.com:46549/mean_stack_app",
                   {user: "hubaDupa",
-                   pass: "Mudrak@123"},
-                  { useNewUrlParser: true }, function(error){});
+                   pass: "Mudrak@123"}
+                 /*{ useNewUrlParser: true }*/).then(
+                    (res) => { /** ready to use. The `mongoose.connect()`
+                            Promise resolves to undefined. */ }
+                    //error => {console.log(">>> Connection attempt to MongoDb failed\n" + error);}
+                  ).catch((error) => {
+                    console.log(">>> Connection attempt to MongoDb failed\n" + error);
+                  });
 
 var passport = require("passport");
 var session = require("express-session");
 
 app.use(session({
-  name: "myName.sessionID",
+  name: "myname.sessionid",
   resave: false,
   saveUninitialized: false,
+  secret: "secret",
   cookie: {
     maxAge: 36000000,
     httpOnly: false,
@@ -38,9 +45,8 @@ app.use(session({
   }
 }));
 require("./passport-config");
-app.use(passport.session());
 app.use(passport.initialize());
-
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

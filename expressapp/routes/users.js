@@ -19,7 +19,7 @@ router.post("/login", function(request, response, next){
       if(error){
         return request.status(501).json(error);
       }
-      return response.status(200).json({message: "Login success"});
+      return response.status(200).json({message: "Login Success"});
     });
   })(request, response, next);
 });
@@ -40,5 +40,22 @@ async function addToDatabase(request, response){
   }
 
 }
+
+router.get("/user", isValidUser, function(request, response, next){
+  return response.status(200).json(request.user);
+});
+
+function isValidUser(request, response, next){
+  if(request.isAuthenticated()){
+    next();
+  } else{
+    return response.status(401).json({message: "Unauthorized request."});
+  }
+}
+
+router.get("/logout", isValidUser, function(request, response, next){
+  request.logout();
+  return response.status(200).json({message: "Logout Success"})
+});
 
 module.exports = router;
