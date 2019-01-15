@@ -32,7 +32,7 @@ mongoose.connect("mongodb://ds046549.mlab.com:46549/mean_stack_app",
 
 var passport = require("passport");
 var session = require("express-session");
-
+const MongoStore = require("connect-mongo")(session);
 app.use(session({
   name: "myname.sessionid",
   resave: false,
@@ -42,7 +42,8 @@ app.use(session({
     maxAge: 36000000,
     httpOnly: false,
     secure: false
-  }
+  },
+  store: new MongoStore({mongooseConnection: mongoose.connection})
 }));
 require("./passport-config");
 app.use(passport.initialize());
