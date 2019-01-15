@@ -58,4 +58,8 @@ router.get("/logout", isValidUser, function(request, response, next){
   return response.status(200).json({message: "Logout Success"})
 });
 
+router.get("/user", function(request, response, next){
+  
+});
+
 module.exports = router;
