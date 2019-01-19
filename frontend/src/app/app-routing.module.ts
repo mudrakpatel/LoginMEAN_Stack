@@ -4,12 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { UserHomeComponent } from "./user-home/user-home.component";
+import { EmailComponent } from "./email/email.component";
 
 const routes: Routes = [
   {path: '', redirectTo:"login", pathMatch: "full"},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
-  {path: "user", component: UserHomeComponent}
+  {path: "user", component: UserHomeComponent},
+  {path: "email", component: EmailComponent}
 ];
 
 @NgModule({
